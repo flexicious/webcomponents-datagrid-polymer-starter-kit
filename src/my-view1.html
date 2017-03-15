@@ -1,0 +1,83 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../library/polymer/polymer.html">
+<link rel="import" href="./flxs/flxs-webcomponents-data-grid.html" />
+<link rel="import" href="./flxs/flxs-webcomponents-data-grid-column.html" />
+<link rel="import" href="../library/iron-ajax/iron-ajax.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="my-view1">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+        padding: 10px;
+      }
+    </style>
+    <iron-ajax auto url="http://mysafeinfo.com/api/data?list=englishmonarchs&format=json" handle-as="json" last-response="{{ajaxResponse}}"
+      id="xhr"></iron-ajax>
+
+
+
+    <div class="card">
+
+
+      <flxs-webcomponents-data-grid dataProvider="{{ ajaxResponse }}" forcePagerRow="true" enablePaging="true" enableFilters="true"
+        enableExport="true" style="width:800px;height:400px" itemClick="[[itemClick]]">
+        <flxs-webcomponents-data-grid-column type="checkbox"></flxs-webcomponents-data-grid-column>
+        <flxs-webcomponents-data-grid-column dataField="nm" headerText="ID" filterControl="TextInput" filterOperation="BeginsWith"></flxs-webcomponents-data-grid-column>
+        <flxs-webcomponents-data-grid-column dataField="cty" headerText="Country" filterControl="ComboBox" filterComboBoxDataProvider="{{countries}}"></flxs-webcomponents-data-grid-column>
+        <flxs-webcomponents-data-grid-column dataField="hse" headerText="House"></flxs-webcomponents-data-grid-column>
+        <flxs-webcomponents-data-grid-column dataField="yrs" headerText="Years"></flxs-webcomponents-data-grid-column>
+      </flxs-webcomponents-data-grid>
+
+      <div class="circle">1</div>
+      <h1>View One</h1>
+      <p>Ut labores minimum atomorum pro. Laudem tibique ut has.</p>
+      <p>Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per
+        in nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit.</p>
+    </div>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'my-view1',
+      properties: {
+      countries:{
+        type: Array,
+        notify:true
+      }, ajaxResponse: {
+          type: Array,
+        notify:true
+        },
+      itemClick:{
+        type:Function,
+        notify:true
+      }
+
+     },
+     
+attached: function() {
+      this.countries = [
+                            { "label":"United Kingdom", "data":"United Kingdom" },
+                            { "label":"Scotland", "data":"Scotland" },
+                            { "label":"Ireland", "data":"Ireland" }
+                        ];
+
+        this.itemClick =  function(evt){
+            alert("Clicked On " + evt.item.id)
+        }
+    },
+
+    });
+    
+  </script>
+</dom-module>
