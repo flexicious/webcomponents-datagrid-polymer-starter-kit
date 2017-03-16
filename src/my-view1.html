@@ -22,14 +22,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         padding: 10px;
       }
     </style>
-    <iron-ajax auto url="http://mysafeinfo.com/api/data?list=englishmonarchs&format=json" handle-as="json" last-response="{{ajaxResponse}}"
+    <iron-ajax auto url="/data/englishmonarchs.json" handle-as="json" last-response="{{ajaxResponse}}"
       id="xhr"></iron-ajax>
 
-
-
     <div class="card">
-
-
       <flxs-webcomponents-data-grid dataProvider="{{ ajaxResponse }}" forcePagerRow="true" enablePaging="true" enableFilters="true"
         enableExport="true" style="width:800px;height:400px" itemClick="[[itemClick]]">
         <flxs-webcomponents-data-grid-column type="checkbox"></flxs-webcomponents-data-grid-column>
