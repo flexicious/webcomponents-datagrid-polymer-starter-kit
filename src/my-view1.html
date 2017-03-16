@@ -26,7 +26,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       id="xhr"></iron-ajax>
 
     <div class="card">
-      <flxs-webcomponents-data-grid dataProvider="{{ ajaxResponse }}" forcePagerRow="true" enablePaging="true" enableFilters="true"
+      <flxs-webcomponents-data-grid dataProvider="{{ ajaxResponse }}" forcePagerRow="true" enableFilters="true"
         enableExport="true" style="width:800px;height:400px" itemClick="[[itemClick]]">
         <flxs-webcomponents-data-grid-column type="checkbox"></flxs-webcomponents-data-grid-column>
         <flxs-webcomponents-data-grid-column dataField="nm" headerText="ID" filterControl="TextInput" filterOperation="BeginsWith"></flxs-webcomponents-data-grid-column>
