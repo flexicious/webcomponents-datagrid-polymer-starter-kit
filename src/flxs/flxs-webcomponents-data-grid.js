@@ -71,6 +71,9 @@
             //TODO - dynamic updates
         },
         _onDataProviderChanged: function(value){
+            if (!this.grid) {
+                this.grid = new flexiciousNmsp.FlexDataGrid(this.$.gridContainer);
+            }
             this.grid.setDataProvider(value);
         }
     });
