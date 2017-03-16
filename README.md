@@ -1,6 +1,6 @@
 # Polymer App Toolbox - Starter Kit Integrated with flexicious html treegrid Polymer webcomponents wrapper
 
-# Run application
+## Run application
 ` npm start`
 
 Webcomponents DataGrid wrapper for flexicious DataGrid
