@@ -25,7 +25,15 @@
         created: function () {
 
         },
+        applyCustomStyle: function (prop) {
+            var styleValue = this.getComputedStyleValue("--flxs-" + prop);
 
+            if (styleValue) {
+                var camelCased = prop.replace(/-([a-z])/g, function (g) { return g[1].toUpperCase(); });
+                console.log(camelCased + ":" + styleValue);
+                this.grid.applyAttribute(this.grid, camelCased, styleValue, true);
+            }
+        },
         /**
          * On attached element to DOM
          */
@@ -38,6 +46,9 @@
             }
 
             this.grid = new flexiciousNmsp.FlexDataGrid(this.$.gridContainer);
+
+            this.applyCustomStyle("alternating-item-colors");
+            this.applyCustomStyle("alternating-text-colors");
             this.async(function () {
                 for (var key in properties) {
                     if (this[key.toLowerCase()]) {
@@ -52,6 +63,8 @@
                 if (this.grid.getColumnLevel()._tempCols.length) {
                     this.grid.getColumnLevel().setColumns(this.grid.getColumnLevel()._tempCols);
                 }
+
+
             }, 1);
         },
 

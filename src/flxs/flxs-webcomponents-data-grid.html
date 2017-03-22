@@ -1,4 +1,32 @@
 <link rel="import" href="flxs-webcomponents-data-grid-styles.html">
+
+<!--
+flxs-webcomponents-data-grid is a web-components wrapper for the Flexicious HTML DataGrid component.
+Along with the following sub-components,
+flxs-webcomponents-data-grid-column
+flxs-webcomponents-data-grid-column-group
+flxs-webcomponents-data-grid-column-level
+You can define markup in HTML to generate the Flexicious HTML DataGrid. 
+Example:
+
+```html
+        <flxs-webcomponents-data-grid dataProvider="{{ donuts }}" forcePagerRow="true" enablePaging="true" enableExport="true" style="width:800px;height:400px"
+          itemClick="[[itemClick]]">
+          <flxs-webcomponents-data-grid-column type="checkbox"></flxs-webcomponents-data-grid-column>
+          <flxs-webcomponents-data-grid-column dataField="id" headerText="ID" filterComboBoxDataProvider="{{donuts}}"></flxs-webcomponents-data-grid-column>
+          <flxs-webcomponents-data-grid-column dataField="type" headerText="Type"></flxs-webcomponents-data-grid-column>
+        </flxs-webcomponents-data-grid>
+```
+
+### Styling
+
+Custom property                           | Description                                       | Default
+------------------------------------------|---------------------------------------------------|--------------------
+`--flxs-alternating-item-colors` | Background colors of the alternating data rows    | [0xEFF3FA, 0xFFFFFF]
+`--flxs-alternating-text-colors` | Text colors of the alternating data rows          | [0x000000, 0x000000]
+-->
+
+
 <dom-module id="flxs-webcomponents-data-grid">
   <template>
 

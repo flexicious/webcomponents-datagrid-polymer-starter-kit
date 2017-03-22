@@ -21,6 +21,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         display: block;
         padding: 10px;
       }
+
+      flxs-webcomponents-data-grid {
+        --flxs-alternating-item-colors: [0xd9d9d9, 0xffffff];
+        --flxs-alternating-text-colors: [0x1F1F1F, 0x0028a0];
+      }
     </style>
     <iron-ajax auto url="http://mysafeinfo.com/api/data?list=englishmonarchs&format=json" handle-as="json" last-response="{{ajaxResponse}}"
       id="xhr"></iron-ajax>
@@ -73,7 +78,7 @@ attached: function() {
                         ];
 
         this.itemClick =  function(evt){
-            alert("Clicked On " + evt.item.id)
+            alert("Clicked On " + evt.item.nm)
         }
     },
 
