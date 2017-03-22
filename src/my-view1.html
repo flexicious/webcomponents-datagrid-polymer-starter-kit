@@ -8,10 +8,10 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 
-<link rel="import" href="../library/polymer/polymer.html">
+<link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="./flxs/flxs-webcomponents-data-grid.html" />
 <link rel="import" href="./flxs/flxs-webcomponents-data-grid-column.html" />
-<link rel="import" href="../library/iron-ajax/iron-ajax.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="shared-styles.html">
 
 <dom-module id="my-view1">
@@ -27,15 +27,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         --flxs-alternating-text-colors: [0x1F1F1F, 0x0028a0];
       }
     </style>
-    <iron-ajax auto url="http://mysafeinfo.com/api/data?list=englishmonarchs&format=json" handle-as="json" last-response="{{ajaxResponse}}"
+    <iron-ajax auto url="/data/englishmonarchs.json" handle-as="json" last-response="{{ajaxResponse}}"
       id="xhr"></iron-ajax>
 
-
-
     <div class="card">
-
-
-      <flxs-webcomponents-data-grid dataProvider="{{ ajaxResponse }}" forcePagerRow="true" enablePaging="true" enableFilters="true"
+      <flxs-webcomponents-data-grid dataProvider="{{ ajaxResponse }}" forcePagerRow="true" enableFilters="true"
         enableExport="true" style="width:800px;height:400px" itemClick="[[itemClick]]">
         <flxs-webcomponents-data-grid-column type="checkbox"></flxs-webcomponents-data-grid-column>
         <flxs-webcomponents-data-grid-column dataField="nm" headerText="ID" filterControl="TextInput" filterOperation="BeginsWith"></flxs-webcomponents-data-grid-column>
