@@ -83,11 +83,10 @@
             // var settings;
             //TODO - dynamic updates
         },
-        _onDataProviderChanged: function(value){
-            if (!this.grid) {
-                this.grid = new flexiciousNmsp.FlexDataGrid(this.$.gridContainer);
+        _onDataProviderChanged: function (value) {
+            if (this.grid) {
+                this.grid.setDataProvider(value);
             }
-            this.grid.setDataProvider(value);
         }
     });
 } ());
