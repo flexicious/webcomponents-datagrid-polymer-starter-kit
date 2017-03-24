@@ -18,7 +18,7 @@
         if (!this.parentNode.gridColumnGroup._tempCols) {
           this.parentNode.gridColumnGroup._tempCols = [];
         }
-        this.parentNode.gridColumnGroup.push(this.gridColumnGroup);
+        this.parentNode.gridColumnGroup._tempCols.push(this.gridColumnGroup);
       } else {
         var lvl = (this.parentNode.grid) ? (this.parentNode.grid.getColumnLevel()) : this.parentNode.gridColumnLevel;
         if (!lvl._tempCols) {

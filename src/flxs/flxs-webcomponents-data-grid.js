@@ -1,4 +1,61 @@
 (function () {
+
+    var uiUtil = flexiciousNmsp.UIUtils;
+    var flxConstants = flexiciousNmsp.Constants;
+    flexiciousNmsp.JQueryAdapter.prototype.showDialog = function (a, f, b, d, g, l, h) {
+        $(a).dialog({
+            appendTo: f.domElement,
+            modal: b,
+            minHeight: g + 50,
+            minWidth: d,
+            zIndex: 700,
+            title: l,
+            position: {
+                my: "top",
+                at: "top",
+                of: f.domElement,
+                collision: "none"
+            },
+            close: function () {
+                $(this).remove();
+                if (h && h.context && h.method)
+                    h.context[h.method]()
+            }
+        })
+    }
+
+    flexiciousNmsp.ExportOptionsView.prototype.onOK = function () {
+
+        var pagingRadios = document.getElementsByName("flxsExportpaging");
+
+        for (var i = 0; i < pagingRadios.length; i++) {
+            if (pagingRadios[i].checked == true) {
+                this.exportOptions.printExportOption = pagingRadios[i].value;
+                break;
+            }
+        }
+
+        this.updateExportColumns();
+        var pgFrom = parseInt(uiUtil.adapter.findElementWithClassName(this.domElement, 'txtPageFrom').value);
+        var pgTo = parseInt(uiUtil.adapter.findElementWithClassName(this.domElement, 'txtPageTo').value);
+        if (uiUtil.adapter.findElementWithClassName(this.domElement, 'RBN_SELECT_PGS').checked) {
+            if (pgFrom >= 1 && pgTo >= 1 && pgFrom <= (this.pageCount) && pgTo <= (this.pageCount) && pgFrom <= pgTo) {
+                this.exportOptions.pageFrom = pgFrom;
+                this.exportOptions.pageTo = pgTo;
+                this.close(flxConstants.ALERT_OK);
+
+            } else {
+                window.alert("Please ensure that the 'page from' is less than or equal to 'page to'");
+            }
+        }
+        else {
+            this.close(flxConstants.ALERT_OK);
+        }
+    };
+
+
+
+
     var template = new flexiciousNmsp.FlexDataGrid();
     var gridPropsAndBehaviors = flexiciousNmsp.SettingsParser.getPropertiesAndBehaviors(template);
     var behaviors = gridPropsAndBehaviors.behaviors, properties = gridPropsAndBehaviors.properties;
@@ -1328,7 +1385,7 @@
         "column-move-alpha",
 
 
-        "enable-column-group-separators" ,
+        "enable-column-group-separators",
         /**
          * The color of the vertical seperators for the column group border.
          * [Style(name="columnGroupSeparatorColor", type="uint", format="Color", inherit="yes")]
@@ -1373,7 +1430,7 @@
         applyCustomStyle: function (prop) {
             var styleValue = this.getComputedStyleValue("--flxs-" + prop);
 
-            if ( styleValue != '') {
+            if (styleValue != '') {
                 var camelCased = prop.replace(/-([a-z])/g, function (g) { return g[1].toUpperCase(); });
                 console.log(camelCased + ":" + styleValue);
                 this.grid.applyAttribute(this.grid, camelCased, styleValue, true);
@@ -1391,7 +1448,7 @@
             }
 
             this.grid = new flexiciousNmsp.FlexDataGrid(this.$.gridContainer);
-            for(var i=0;i<allStyles.length;i++){
+            for (var i = 0; i < allStyles.length; i++) {
                 this.applyCustomStyle(allStyles[i]);
             }
             this.async(function () {
