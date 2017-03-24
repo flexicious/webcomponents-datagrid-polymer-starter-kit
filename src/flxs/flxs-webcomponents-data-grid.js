@@ -2,6 +2,25 @@
 
     var uiUtil = flexiciousNmsp.UIUtils;
     var flxConstants = flexiciousNmsp.Constants;
+
+    flexiciousNmsp.UIComponent.prototype.globalToLocal = function (ptIn) {
+        var offset = uiUtil.adapter.offset(this.domElement);
+        if (offset && offset.top==0 && offset.left==0){
+            var rect=this.domElement.getBoundingClientRect();
+            offset = rect;
+        }
+         return new flexiciousNmsp.Point(ptIn.x - (offset ? offset.left : 0) + this.domElement.scrollLeft, ptIn.y - (offset ? offset.top : 0) + this.domElement.scrollTop);
+    };
+    flexiciousNmsp.UIComponent.prototype.localToGlobal = function (ptIn) {
+        var offset = uiUtil.adapter.offset(this.domElement);
+        if (offset && offset.top==0 && offset.left==0){
+            var rect=this.domElement.getBoundingClientRect();
+            offset = rect;
+        }
+        return new flexiciousNmsp.Point(offset.left + ptIn.x, offset.top + ptIn.y);
+    };
+
+
     flexiciousNmsp.JQueryAdapter.prototype.showDialog = function (a, f, b, d, g, l, h) {
         $(a).dialog({
             appendTo: f.domElement,
